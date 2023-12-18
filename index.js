@@ -13,7 +13,7 @@ app.use(
     target: "https://api.openai.com",
     changeOrigin: true,
     onProxyReq: (proxyReq, req, res) => {
-      console.log("req:", req);
+      console.log("req:", req.body());
       console.log("req originurl:", req.originalUrl);
       proxyReq.setHeader("Authorization", `Bearer ${process.env.API_KEY}`);
     },
