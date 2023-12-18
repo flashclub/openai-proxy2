@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const PORT = 3000;
 
-const {createProxyMiddleware} = require("http-proxy-middleware");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -13,7 +13,8 @@ app.use(
     target: "https://api.openai.com",
     changeOrigin: true,
     onProxyReq: (proxyReq, req, res) => {
-      console.log(req.originalUrl);
+      console.log("req:", req);
+      console.log("req originurl:", req.originalUrl);
       proxyReq.setHeader("Authorization", `Bearer ${process.env.API_KEY}`);
     },
     onProxyRes: (proxyRes, req, res) => {
@@ -21,7 +22,7 @@ app.use(
       proxyRes.headers["Access-Control-Allow-Headers"] =
         "Content-Type,Content-Length, Authorization, Accept,X-Requested-With";
     },
-  })
+  }),
 );
 app
   .listen(PORT, () => {
