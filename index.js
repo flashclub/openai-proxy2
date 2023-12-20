@@ -21,6 +21,7 @@ app.use(
       proxyRes.headers["Access-Control-Allow-Origin"] = "*";
       proxyRes.headers["Access-Control-Allow-Headers"] =
         "Content-Type,Content-Length, Authorization, Accept,X-Requested-With";
+      console.log("res: ", res);
     },
   }),
 );
